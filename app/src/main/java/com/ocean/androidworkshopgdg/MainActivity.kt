@@ -70,11 +70,14 @@ fun page1(onClicked: () -> Unit){
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
-    Column(modifier = Modifier.padding(24.dp)) {
+    Surface(color = MaterialTheme.colors.primary) {
+        Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+        Column(modifier = Modifier.padding(24.dp)) {
 //        Text("First row")
 //        Text("Second row")
+        }
     }
+
 
 //    val expanded = remember{ mutableStateOf(false)}
 //    Surface(
@@ -99,7 +102,7 @@ fun Greeting(name: String) {
 //    }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Text preview")
 @Composable
 fun DefaultPreview() {
     AndroidWorkShopGDGTheme {
