@@ -25,16 +25,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             /** AndroidWorkShopGDGTheme is a way to style Composable functions. */
             AndroidWorkShopGDGTheme {
-                // A surface container using the 'background' color from the theme
+                //todo: A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column {
+//                    Column {
                         Greeting("Android")
 //                        Greeting("Google")
 //                        Greeting("iOS")
-                    }
+//                    }
 
 //                    if (isOnBoarding.value){
 //                        page1() //todo: declare the onlick fun
