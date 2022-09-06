@@ -22,8 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             /** AndroidWorkShopGDGTheme is a way to style Composable functions. */
             AndroidWorkShopGDGTheme {
-//                MyApp()
-
+                MyApp()
                 //todo: A surface container using the 'background' color from the theme
 //                Surface(
 //                    modifier = Modifier.fillMaxSize(),
@@ -47,7 +46,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun OnBoardingScreen(){
+private fun MyApp() {
+    var shouldShowOnboarding by remember { mutableStateOf(true) }
+
+    if (shouldShowOnboarding) {
+        OnBoardingScreen(onContinueClicked = { shouldShowOnboarding = false })
+    } else {
+        Greeting()
+    }
+}
+
+@Composable
+private fun OnBoardingScreen(onContinueClicked: () -> Unit) {
     // TODO: This state should be hoisted
     var shouldShowOnboarding by remember { mutableStateOf(true) }
 
@@ -79,16 +89,18 @@ fun Greeting(name: String) {
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
-            Column(modifier = Modifier
-                .weight(1f)
-                .padding(bottom = extraPadding)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
+            ) {
                 Text(text = "Hello, ")
                 Text(text = name)
             }
             OutlinedButton(
                 onClick = { expanded.value = !expanded.value }
             ) {
-                Text( if (expanded.value) "Show less" else "Show more")
+                Text(if (expanded.value) "Show less" else "Show more")
             }
         }
 
@@ -99,17 +111,17 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     AndroidWorkShopGDGTheme {
-//        Greeting("Android")
+        Greeting("Android")
 //        MyApp()
-        OnBoardingScreen()
+//        OnBoardingScreen(onContinueClicked = {})//todo: Do nothing on click.
     }
 }
 
-@Composable
-private fun MyApp(names: List<String> = listOf("World", "Compose")) {
-    Column(modifier = Modifier.padding(vertical = 4.dp)) {
-        for (name in names) {
-            Greeting(name = name)
-        }
-    }
-}
+//@Composable
+//private fun MyApp(names: List<String> = listOf("World", "Compose")) {
+//    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+//        for (name in names) {
+//            Greeting(name = name)
+//        }
+//    }
+//}
