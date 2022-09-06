@@ -25,13 +25,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             /** AndroidWorkShopGDGTheme is a way to style Composable functions. */
             AndroidWorkShopGDGTheme {
+                MyApp()
                 //todo: A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ) {
 //                    Column {
-                        Greeting("Android")
+//                        Greeting("Android")
 //                        Greeting("Google")
 //                        Greeting("iOS")
 //                    }
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
 //                        page1() //todo: declare the onlick fun
 //                    }
 
-                }
+//                }
             }
         }
 
@@ -106,6 +107,14 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     AndroidWorkShopGDGTheme {
+//        Greeting("Android")
+        MyApp()
+    }
+}
+
+@Composable
+fun MyApp() {
+    Surface(color = MaterialTheme.colors.background) {
         Greeting("Android")
     }
 }
