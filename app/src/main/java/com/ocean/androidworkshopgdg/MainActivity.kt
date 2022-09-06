@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
             /** AndroidWorkShopGDGTheme is a way to style Composable functions. */
             AndroidWorkShopGDGTheme {
                 MyApp()
+
                 //todo: A surface container using the 'background' color from the theme
 //                Surface(
 //                    modifier = Modifier.fillMaxSize(),
@@ -71,13 +72,24 @@ fun page1(onClicked: () -> Unit){
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = MaterialTheme.colors.primary) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
-        Column(modifier = Modifier.padding(24.dp)) {
-//        Text("First row")
-//        Text("Second row")
+    Surface(
+        color = MaterialTheme.colors.primary,
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp)) {
+                Text(text = "Hello, ")
+                Text(text = name)
+            }
+            OutlinedButton(onClick = { /*TODO*/ }) {
+                Text("Show more")
+            }
         }
+
     }
+}
 
 
 //    val expanded = remember{ mutableStateOf(false)}
@@ -101,7 +113,7 @@ fun Greeting(name: String) {
 //            }
 //        }
 //    }
-}
+
 
 @Preview(showBackground = true, name = "Text preview")
 @Composable
@@ -113,8 +125,10 @@ fun DefaultPreview() {
 }
 
 @Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Greeting("Android")
+private fun MyApp(names: List<String> = listOf("World", "Compose")) {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name = name)
+        }
     }
 }
