@@ -72,48 +72,30 @@ fun page1(onClicked: () -> Unit){
 
 @Composable
 fun Greeting(name: String) {
+
+    val expanded = remember { mutableStateOf(false) }
+    val extraPadding = if (expanded.value) 48.dp else 0.dp
+
     Surface(
         color = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp)) {
+                .weight(1f)
+                .padding(bottom = extraPadding)) {
                 Text(text = "Hello, ")
                 Text(text = name)
             }
-            OutlinedButton(onClick = { /*TODO*/ }) {
-                Text("Show more")
+            OutlinedButton(
+                onClick = { expanded.value = !expanded.value }
+            ) {
+                Text( if (expanded.value) "Show less" else "Show more")
             }
         }
 
     }
 }
-
-
-//    val expanded = remember{ mutableStateOf(false)}
-//    Surface(
-//        color = MaterialTheme.colors.primary,
-//        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-//    ) {
-//        Row(modifier = Modifier.padding(20.dp)) {
-//            Column(modifier = Modifier
-//                .weight(1f)
-//                .padding(bottom = if (expanded.value) 48.dp else 0.dp)) {
-//                Text(text = "Hello, ")
-//                Text(text = name)
-//            }
-//            OutlinedButton(
-//                onClick = { /* TODO */
-//                    expanded.value = !expanded.value
-//                }
-//            ) {
-//                Text(if(expanded.value)"Show less" else "Show more")
-//            }
-//        }
-//    }
-
 
 @Preview(showBackground = true, name = "Text preview")
 @Composable
