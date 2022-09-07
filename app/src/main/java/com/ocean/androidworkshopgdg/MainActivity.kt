@@ -52,15 +52,14 @@ private fun MyApp() {
     if (shouldShowOnboarding) {
         OnBoardingScreen(onContinueClicked = { shouldShowOnboarding = false })
     } else {
-        Greeting()
+        Greetings()
     }
 }
 
 @Composable
 private fun OnBoardingScreen(onContinueClicked: () -> Unit) {
     // TODO: This state should be hoisted
-    var shouldShowOnboarding by remember { mutableStateOf(true) }
-
+//    var shouldShowOnboarding by remember { mutableStateOf(true) }
     Surface {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -70,14 +69,28 @@ private fun OnBoardingScreen(onContinueClicked: () -> Unit) {
             Text("Welcome to the Basics Codelab!")
             Button(
                 modifier = Modifier.padding(vertical = 24.dp),
-                onClick = { shouldShowOnboarding = false }
+                onClick = onContinueClicked //{ shouldShowOnboarding = false }
             ) {
                 Text("Continue")
             }
         }
     }
 }
-
+@Composable
+private fun Greetings(names: List<String> = listOf("World", "Compose")) {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name = name)
+        }
+    }
+}
+@Preview(showBackground = true, widthDp = 320, heightDp = 320)
+@Composable
+fun OnboardingPreview() {
+    AndroidWorkShopGDGTheme {
+        OnBoardingScreen(onContinueClicked = {})//todo: Do nothing on click.
+    }
+}
 @Composable
 fun Greeting(name: String) {
 
@@ -106,16 +119,18 @@ fun Greeting(name: String) {
 
     }
 }
-
-@Preview(showBackground = true, name = "Text preview")
+//@Preview(showBackground = true, name = "Text preview")
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     AndroidWorkShopGDGTheme {
-        Greeting("Android")
+        Greetings()
+//        Greeting("Android")
+//        Greeting( "World")
 //        MyApp()
-//        OnBoardingScreen(onContinueClicked = {})//todo: Do nothing on click.
     }
 }
+
 
 //@Composable
 //private fun MyApp(names: List<String> = listOf("World", "Compose")) {
