@@ -77,7 +77,7 @@ private fun OnBoardingScreen(onContinueClicked: () -> Unit) {
     }
 }
 @Composable
-private fun Greetings(names: List<String> = listOf("World", "Compose")) {
+private fun Greetings(names: List<String> = List(1000){"$it"}) { //todo: names: List<String> = listOf("World", "Compose")
     Column(modifier = Modifier.padding(vertical = 4.dp)) {
         for (name in names) {
             Greeting(name = name)
