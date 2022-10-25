@@ -54,6 +54,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MyApp() {
 
+    /** Instead of using remember you can use rememberSaveable.
+     * This will save each state surviving configuration changes
+     * (such as rotations) and process death.*/
 //    var shouldShowOnboarding by remember { mutableStateOf(true) }
     var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
 
@@ -109,7 +112,10 @@ fun Greeting(name: String) {
 
 //    val expanded = remember { mutableStateOf(false) }
 //    val extraPadding = if (expanded.value) 48.dp else 0.dp
-    var expanded by remember { mutableStateOf(false) }
+    /** Instead of using remember you can use rememberSaveable.
+     * This will save each state surviving configuration changes
+     * (such as rotations) and process death.*/
+    var expanded by rememberSaveable{ mutableStateOf(false) }
     val extraPadding by animateDpAsState(
         if (expanded) 48.dp else 0.dp, animationSpec = spring(
             dampingRatio = Spring.DampingRatioHighBouncy,
@@ -125,11 +131,12 @@ fun Greeting(name: String) {
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(bottom = extraPadding)
+                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello, ")
                 Text(text = name)
             }
+
             OutlinedButton(
 //                onClick = { expanded.value = !expanded.value }
                 onClick = {expanded =! expanded}
