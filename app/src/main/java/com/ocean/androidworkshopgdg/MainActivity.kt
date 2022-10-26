@@ -3,9 +3,7 @@ package com.ocean.androidworkshopgdg
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -28,7 +26,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             /** AndroidWorkShopGDGTheme is a way to style Composable functions. */
             AndroidWorkShopGDGTheme {
-                MyApp()
+                //todo: finishing touches from jetpack compose basics
+                MyApp(modifier = Modifier.fillMaxSize())
+//                MyApp()
                 //todo: A surface container using the 'background' color from the theme
 //                Surface(
 //                    modifier = Modifier.fillMaxSize(),
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MyApp() {
+private fun MyApp(modifier: Modifier = Modifier) {
 
     /** Instead of using remember you can use rememberSaveable.
      * This will save each state surviving configuration changes
@@ -60,6 +60,7 @@ private fun MyApp() {
 //    var shouldShowOnboarding by remember { mutableStateOf(true) }
     var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
 
+    Surface(modifier, color = MaterialTheme.colorScheme.background){}
     if (shouldShowOnboarding) {
         OnBoardingScreen(onContinueClicked = { shouldShowOnboarding = false })
     } else {
@@ -119,7 +120,7 @@ fun Greeting(name: String) {
     val extraPadding by animateDpAsState(
         if (expanded) 48.dp else 0.dp, animationSpec = spring(
             dampingRatio = Spring.DampingRatioHighBouncy,
-            stiffness = Spring.StiffnessLow
+            stiffness = Spring.StiffnessLow  //todo: try out spring, different specs (tween, repeatable) and different functions: animateColorAsState or a different type of animation API.
         )
     )
 
